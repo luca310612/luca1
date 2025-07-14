@@ -1,0 +1,63 @@
+/* カード表示エリア */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .card {
+    background: #ffffff;
+    border: 1px solid #e0e6ed;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.3rem;
+    color: var(--main-color);
+    font-weight: bold;
+  }
+  
+  .card p {
+    margin: 0.5rem 0;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .card-button {
+    margin-top: 1rem;
+    padding: 0.7em 1.5em;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .card-button:hover {
+    background-color: var(--btn-hover);
+    transform: translateY(-2px);
+  }
+  
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .card-container {
+      grid-template-columns: 1fr;
+      padding: 0 0.5rem;
+    }
+  }

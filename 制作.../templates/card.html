@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>病院一覧</title>
+    <link rel="stylesheet" href="/static/card.css">
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+    <header>
+        <h1>病院一覧</h1>
+    </header>
+
+    <main>
+        <div class="card-container" id="hospital-results">
+            {% for hospital in cards %}
+            <div class="card">
+                <h3>{{ hospital.name }}</h3>
+                <p>住所: {{ hospital.address }}</p>
+                <p>診療科: {{ hospital.department | join(", ") if hospital.department else "" }}</p>
+                <p>口コミ数: {{ hospital.reviews }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="image-section">
+            <img src="/static/images/default.jpg" alt="Default Image" />
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 病院情報サイト
+    </footer>
+
+    <script>
+        function renderHospitalCards(hospitals) {
+            const container = document.getElementById('hospital-results');
+            container.innerHTML = ''; // 初期化
+
+            hospitals.forEach(hospital => {
+                const card = document.createElement('div');
+                card.className = 'hospital-result';
+                card.innerHTML = `
+      <h3>${hospital.name}</h3>
+      <p>住所: ${hospital.address}</p>
+      <p>診療科: ${hospital.department}</p>
+      <p>口コミ数: ${hospital.reviews}</p>
+    `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+
+</html>

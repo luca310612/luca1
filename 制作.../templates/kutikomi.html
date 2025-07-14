@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{ hospital.name }} | 〇〇マップ</title>
+  <link rel="stylesheet" href="/static/index.css">
+  <link rel="icon" href="/static/images/favicon.ico">
+</head>
+
+<body background="https://images.pexels.com/photos/533769/pexels-photo-533769.jpeg">
+  <header>
+    <div class="header-logo">
+      <h2><a href="/" style="text-decoration: none; color: inherit;">〇〇マップ</a></h2>
+      <a href="#use-methot" class="header-link">使用方法</a>
+      <a href="#what-map" class="header-link">〇〇マップとは</a>
+      <a href="#contact" class="header-link">お問い合わせ</a>
+    </div>
+  </header>
+
+  <main>
+    <section
+      style="max-width: 700px; margin: 2em auto; padding: 2em; background: white; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <h1>{{ hospital.name }}</h1>
+      <p><strong>住所：</strong>{{ hospital.address }}</p>
+      <p><strong>都道府県：</strong>{{ hospital.prefecture }}</p>
+      <p><strong>Google Map:</strong>
+        <a href="{{ hospital.maps }}" target="_blank" rel="noopener">地図で見る</a>
+      </p>
+      <p><strong>診療科：</strong>{{ hospital.department }}</p>
+      <p><strong>口コミ数：</strong>{{ hospital.reviews }} 件</p>
+
+      <hr>
+
+      <h2>口コミを投稿する</h2>
+      <form method="post">
+        <textarea name="comment" rows="5" placeholder="口コミを入力..." required></textarea><br><br>
+        <button type="submit">投稿</button>
+      </form>
+
+      <hr>
+
+      <h2>口コミ一覧</h2>
+      <p>
+      <ul>
+        {% for r in reviews %}
+        <li>{{ r }}</li>
+        {% else %}
+        <li>口コミはまだありません。</li>
+        {% endfor %}
+      </ul>
+      </p>
+    </section>
+
+    <section id="hospital-results"
+      style="max-width: 700px; margin: 2em auto; padding: 2em; background: white; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <h2>病院検索結果</h2>
+      <!-- 病院カードがここに表示されます -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 〇〇マップ</p>
+  </footer>
+
+  <script>
+    function renderHospitalCards(hospitals) {
+      const container = document.getElementById('hospital-results');
+      container.innerHTML = ''; // 初期化
+
+      hospitals.forEach(hospital => {
+        const card = document.createElement('div');
+        card.className = 'hospital-result';
+        card.innerHTML = `
+          <h3>${hospital.name}</h3>
+          <p>住所: ${hospital.address}</p>
+          <p>診療科: ${hospital.department}</p>
+          <p>口コミ数: ${hospital.reviews}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+
+</html>
